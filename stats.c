@@ -1,31 +1,33 @@
 /******************************************************************************
- * Copyright (C) 2017 by Alex Fosdick - University of Colorado
+ * @file C1M1 stats.c
+ * @brief Assigment Week 1
+ * 
+ * @author David Tutusaus
+ * @date 2024-02-17
+ *
+ * A simple C-Programming example that exhibits a handful of basic c-programming
+ * features to show how to calculate some statistics on a set of numbers:
+ *     -Print Statistics
+ *     -Print Array
+ *     -Find the Median
+ *     -Find the Mean
+ *     -Find the Maximum
+ *     -Find the Minimum
+ *     -Sort the Data Array
+ *
+ *    Note: This program is meant to be compiled in order to verify the 
+ *          results.
+ *
+ *****************************************************************************/
+/******************************************************************************
+ * Copyright (C) 2024 by David Tutusaus - Student
  *
  * Redistribution, modification or use of this software in source or binary
  * forms is permitted as long as the files maintain this copyright. Users are 
  * permitted to modify this and use it to learn about the field of embedded
- * software. Alex Fosdick and the University of Colorado are not liable for any
- * misuse of this material. 
+ * software. David Tutusaus is not liable for any misuse of this material. 
  *
  *****************************************************************************/
-/**
- * @file <stats.c> 
- * @brief <Practice with pointers, parameters, header files and loop instructions.>
- *
- * Functions:
- * main ()
- * print_statistics ()
- * print_array ()
- * find_median ()
- * find_mean ()
- * find_maximum ()
- * find_minimum ()
- * sort_array ()
- *
- * @author <David Tutusaus>
- * @date <2024-02-17>
- *
- */
 
 #include <stdio.h>
 #include "stats.h"
@@ -33,14 +35,108 @@
 /* Size of the Data Set */
 #define SIZE (40)
 
+/******************************************************************************
+ * Function: print_statistics
+ * Description:
+ *     This function prints all the returned values from the statistics
+ *     functions.
+ * Parameters:
+ *     unsigned char * array_ptr: Pointer to the sample data set
+ *     unsigned char array_lenght: Number of items in data set
+ * Return:
+ *     0
+ *****************************************************************************/
+unsigned char print_statistics (unsigned char* array_ptr, unsigned char array_lenght);
+
+/******************************************************************************
+ * Function: find_median
+ * Description:
+ *     This function takes a set of numbers and finds the median of the set.
+ *     The function works with both "even" and "odd" sizes.
+ * Parameters:
+ *     unsigned char * array_ptr: Pointer to the sample data set
+ *     unsigned char array_lenght: Number of items in data set
+ * Return: 
+ *     Truncated unsigned char: with the calculated median
+ *****************************************************************************/
+unsigned char find_median (unsigned char* array_ptr, unsigned char array_lenght);
+
+/******************************************************************************
+ * Function: find_mean
+ * Description:
+ *     This function takes a set of numbers and finds the mean of the set.
+ * Parameters:
+ *     unsigned char * array_ptr: Pointer to the sample data set
+ *     unsigned char array_lenght: Number of items in data set
+ * Return: 
+ *     Truncated unsigned char: with the calculated mean
+ *****************************************************************************/
+unsigned char find_mean (unsigned char* array_ptr, unsigned char array_lenght);
+
+/******************************************************************************
+ * Function: find_minimum
+ * Description:
+ *     This function takes a set of numbers and finds the minimum of the set.
+ * Parameters:
+ *     unsigned char * array_ptr: Pointer to the sample data set
+ *     unsigned char array_lenght: Number of items in data set
+ * Return: 
+ *     unsigned char: with the found minimum
+ *****************************************************************************/
+unsigned char find_minimum (unsigned char* array_ptr, unsigned char array_lenght);
+
+/******************************************************************************
+ * Function: find_maximum
+ * Description:
+ *     This function takes a set of numbers and finds the maximum of the set.
+ * Parameters:
+ *     unsigned char * array_ptr: Pointer to the sample data set
+ *     unsigned char array_lenght: Number of items in data set
+ * Return: 
+ *     unsigned char: with the found maximum
+ *****************************************************************************/
+unsigned char find_maximum (unsigned char* array_ptr, unsigned char array_lenght);
+
+/******************************************************************************
+ * Function: sort_array
+ * Description:
+ *     This function takes a set of numbers sorts it, in a descending order.
+ *     Descending order means that the first array's position (0) contains the
+ *     highest number, and the last array's position contains the lowest number.
+ * Parameters:
+ *     unsigned char * array_ptr: Pointer to the sample data set
+ *     unsigned char array_lenght: Number of items in data set
+ * Return: 
+ *     0
+ * 
+ * Note: since the function is accessing the original data set via pointers,
+ *       there is no need to return anything.
+ *****************************************************************************/
+unsigned char sort_array (unsigned char* array_ptr, unsigned char array_lenght);
+
+/******************************************************************************
+ * Function: print_array
+ * Description:
+ *     This function takes a set of numbers and print them in the default output.
+ *     The function includes a numeration in front.
+ * Parameters:
+ *     unsigned char * array_ptr: Pointer to the sample data set
+ *     unsigned char array_lenght: Number of items in data set
+ * Return: 
+ *     0
+ * 
+ *****************************************************************************/
+unsigned char print_array (unsigned char* array_ptr, unsigned char array_lenght);
+
+
 unsigned int main (void) {
   /* Variable Declarations Go Here */
 
   unsigned char array_test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
-                            114, 88,   45,  76, 123,  87,  25,  23,
-                            200, 122, 150, 90,   92,  87, 177, 244,
-                            201,   6,  12,  60,   8,   2,   5,  67,
-                              7,  87, 250, 230,  99,   3, 100,  90};
+                                    114, 88,   45,  76, 123,  87,  25,  23,
+                                    200, 122, 150, 90,   92,  87, 177, 244,
+                                    201,   6,  12,  60,   8,   2,   5,  67,
+                                      7,  87, 250, 230,  99,   3, 100,  90};
 
   unsigned char array_sorted[SIZE] = {0};
 
@@ -94,12 +190,15 @@ unsigned char find_median (unsigned char* array_ptr, unsigned char array_lenght)
   array_index = array_lenght / 2;
 
   if (var_tmp == 0) {
+    // If "even" amount of entries
     var_tmp = (array_ptr[array_index-1] + array_ptr[array_index]) / 2;
   }
   else {
+    // If "odd" amount of entries
     var_tmp = array_ptr[array_index-1];
   }
 
+  // Truncates from "unsigned int" to "unsigned char" to secure "type compatibility"
   return (unsigned char) var_tmp;
 }
 
